@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>هايبر بدر — كل احتياجاتك في مكان واحد</title>
+  <meta name="description" content="هايبر بدر هو سوبر ماركت متكامل في بئر العبد - مواد غذائية، مشروبات، منظفات، منتجات ألبان وسناكس بحرفية وأسعار مناسبة." />
+  <meta name="theme-color" content="#2e7d32" />
+  <link rel="icon" href="favicon.ico" />
+
+  <style>
+    :root{
+      --brand:#2e7d32;
+      --brand-dark:#1b5e20;
+      --bg:#f0f6f2;
+      --card:#ffffff;
+      --muted:#6b6b6b;
+      --accent:#e8f5e9;
+      --radius:12px;
+      --max-width:1200px;
+      --gap:18px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Tahoma", "Helvetica Neue", Arial, sans-serif;
+      --perspective: 1100px;
+    }
+
+    /* Reset & layout */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(46,125,50,0.06), transparent 8%),
+        radial-gradient(800px 400px at 90% 90%, rgba(27,94,32,0.03), transparent 12%),
+        var(--bg);
+      color:#111;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      overflow-y:scroll;
+      perspective: var(--perspective);
+      -webkit-font-feature-settings: "ss01" on;
+    }
+
+    .wrap {
+      max-width:var(--max-width);
+      margin:28px auto;
+      padding:0 20px;
+      transform-style:preserve-3d;
+    }
+
+    a { color:var(--brand-dark); text-decoration:none; }
+    a:focus, button:focus { outline:3px solid rgba(46,125,50,0.18); outline-offset:3px; }
+
+    /* Skip link */
+    .skip-link{
+      position:fixed;
+      left:1rem;
+      top:1rem;
+      background:#000;
+      color:#fff;
+      padding:8px 12px;
+      z-index:1000;
+      border-radius:6px;
+      transform:translateY(-120%);
+      transition:transform .18s ease;
+    }
+    .skip-link:focus{ transform:translateY(0); }
+
+    /* Scene */
+    .scene {
+      transform-style:preserve-3d;
+      perspective: var(--perspective);
+      transition:transform .12s ease;
+    }
+
+    header {
+      background:linear-gradient(180deg,var(--brand) 0%, var(--brand-dark) 100%);
+      color:#fff;
+      padding:34px 18px;
+      border-radius:var(--radius);
+      text-align:center;
+      transform-origin:center;
+      transform: translateZ(60px) rotateX(0deg);
+      box-shadow: 0 12px 30px rgba(16,60,25,0.12);
+    }
+    header h1{ margin:0 0 6px; font-size:1.9rem; letter-spacing:0.5px }
+    header p{ margin:0; opacity:0.95 }
+
+    main { margin-top:20px; transform-style:preserve-3d; }
+
+    section.card{
+      background:var(--card);
+      padding:20px;
+      border-radius:var(--radius);
+      box-shadow: 0 6px 16px rgba(14,30,12,0.06);
+      margin-bottom:18px;
+      transform-origin:center;
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+
+    h2{
+      color:var(--brand);
+      margin-top:0;
+      margin-bottom:12px;
+      font-size:1.2rem;
+    }
+
+    .categories{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+      gap:var(--gap);
+      transform: translateZ(30px) scale(1.02);
+    }
+    .cat{
+      background:linear-gradient(180deg, var(--accent), #fff);
+      padding:18px;
+      text-align:center;
+      border-radius:12px;
+      font-weight:800;
+      color:#0f4f2b;
+      box-shadow:inset 0 -2px 0 rgba(0,0,0,0.02), 0 8px 20px rgba(10,40,10,0.06);
+      transition:transform .16s cubic-bezier(.2,.9,.3,1), box-shadow .16s;
+      cursor:pointer;
+      transform-origin:center;
+    }
+    .cat:hover{ transform: translateY(-8px) rotateX(6deg) translateZ(18px); box-shadow:0 20px 40px rgba(6,30,12,0.12); }
+
+    .contact-row{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+      font-size:1rem;
+      color:var(--muted);
+    }
+    .phone {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:#fff;
+      padding:8px 12px;
+      border-radius:10px;
+      box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      transform: translateZ(26px);
+    }
+    .phone a { font-weight:800; color:var(--brand-dark); }
+
+    iframe.map {
+      width:100%;
+      height:320px;
+      border:0;
+      margin-top:12px;
+      border-radius:10px;
+      transform: translateZ(10px);
+    }
+
+    footer {
+      background:var(--brand-dark);
+      color:#fff;
+      text-align:center;
+      padding:14px;
+      border-radius:10px;
+      margin-top:18px;
+      font-size:0.95rem;
+      transform: translateZ(24px);
+      box-shadow: 0 10px 30px rgba(12,35,15,0.08);
+    }
+
+    /* Floating decorative items */
+    .float-blob{
+      position:fixed;
+      pointer-events:none;
+      border-radius:50%;
+      filter:blur(28px);
+      opacity:.18;
+      transform:translateZ(-100px);
+      z-index:0;
+    }
+    .blob-a{ width:420px; height:220px; right:-80px; top:40px; background:linear-gradient(90deg, rgba(46,125,50,0.18), rgba(27,94,32,0.06)); }
+    .blob-b{ width:260px; height:160px; left:-60px; bottom:60px; background:linear-gradient(90deg, rgba(255,202,40,0.12), rgba(255,124,0,0.06)); }
+
+    /* Card hover feedback for keyboard focus */
+    .cat:focus{ outline: none; transform: translateY(-10px) rotateX(7deg) translateZ(22px); box-shadow:0 22px 44px rgba(6,30,12,0.14); }
+
+    /* Responsiveness tweaks */
+    @media (min-width:900px){
+      header{ padding:40px 24px }
+      .wrap{ padding:0 24px }
+    }
+
+    /* Small screens */
+    @media (max-width:480px){
+      header h1{ font-size:1.4rem }
+      .categories{ grid-template-columns:repeat(2,1fr) }
+    }
+
+    /* Subtle animation for depth layers */
+    .depth {
+      transition: transform .18s ease-out;
+      will-change:transform;
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+
+  <div class="wrap scene" id="sceneRoot" aria-hidden="false">
+    <div class="float-blob blob-a" aria-hidden="true"></div>
+    <div class="float-blob blob-b" aria-hidden="true"></div>
+
+    <header role="banner" aria-labelledby="site-title" class="depth" data-depth="0.12">
+      <h1 id="site-title">هايبر بدر</h1>
+      <p>كل احتياجاتك في مكان واحد</p>
+    </header>
+
+    <main id="main" role="main" aria-labelledby="main-heading">
+      <section class="card depth" aria-labelledby="about-heading" data-depth="0.06">
+        <h2 id="about-heading">من نحن</h2>
+        <p>
+          هايبر بدر هو سوبر ماركت متكامل يقدم أفضل المنتجات الغذائية والمنزلية
+          بجودة عالية وأسعار مناسبة لخدمة أهالي بئر العبد.
+        </p>
+      </section>
+
+      <section class="card depth" aria-labelledby="categories-heading" data-depth="0.08">
+        <h2 id="categories-heading">الأقسام</h2>
+        <nav class="categories" aria-label="أقسام المتجر">
+          <div class="cat" role="button" tabindex="0">مواد غذائية</div>
+          <div class="cat" role="button" tabindex="0">مشروبات</div>
+          <div class="cat" role="button" tabindex="0">منظفات</div>
+          <div class="cat" role="button" tabindex="0">منتجات ألبان</div>
+          <div class="cat" role="button" tabindex="0">سناكس وحلويات</div>
+          <div class="cat" role="button" tabindex="0">مستلزمات منزلية</div>
+        </nav>
+      </section>
+
+      <section class="card depth" aria-labelledby="contact-heading" data-depth="0.07">
+        <h2 id="contact-heading">تواصل معنا</h2>
+
+        <div class="contact-row">
+          <div class="phone" aria-hidden="false">
+            <span aria-hidden="true">📞</span>
+            <a href="tel:+201093048156" aria-label="اتصال برقم هايبر بدر 01093048156">01093048156</a>
+          </div>
+          <p style="margin:0; color:var(--muted)">ساعات العمل: 8 صباحاً — 11 مساءً</p>
+        </div>
+
+        <iframe
+          class="map"
+          title="موقع هايبر بدر في بئر العبد على خرائط Google"
+          src="https://www.google.com/maps?q=Bir+El+Abd+North+Sinai&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          aria-label="خريطة موقع هايبر بدر">
+        </iframe>
+      </section>
+    </main>
+
+    <footer role="contentinfo" class="depth" data-depth="0.10">
+      © 2026 هايبر بدر – جميع الحقوق محفوظة
+    </footer>
+  </div>
+
+  <!-- Structured data: LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "هايبر بدر",
+    "description": "هايبر بدر - سوبر ماركت في بئر العبد يقدم منتجات غذائية، مشروبات، منظفات، ألبان وسناكس.",
+    "telephone": "+20-1093048156",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "بئر العبد",
+      "addressRegion": "شمال سيناء",
+      "addressCountry": "EG"
+    },
+    "url": "",
+    "openingHours": "Mo-Su 08:00-23:00"
+  }
+  </script>
+
+  <script>
+    // 3D parallax / tilt interaction
+    (function(){
+      const root = document.getElementById('sceneRoot');
+      const depths = Array.from(document.querySelectorAll('.depth'));
+      const maxTilt = 12;          // degrees
+      const maxTranslate = 28;     // px
+
+      // Normalize pointer coords to range [-1,1]
+      function normCoords(e){
+        const rect = root.getBoundingClientRect();
+        const x = ((e.clientX || (e.touches && e.touches[0].clientX)) - rect.left) / rect.width;
+        const y = ((e.clientY || (e.touches && e.touches[0].clientY)) - rect.top) / rect.height;
+        return { x: (x - 0.5) * 2, y: (y - 0.5) * 2 };
+      }
+
+      function applyTransform(cx, cy){
+        // rotate scene slightly for immersive effect
+        const sceneRotX = cy * maxTilt * -0.28;
+        const sceneRotY = cx * maxTilt * 0.28;
+        root.style.transform = `perspective(${getComputedStyle(document.documentElement).getPropertyValue('--perspective')}) rotateX(${sceneRotX}deg) rotateY(${sceneRotY}deg)`;
+
+        depths.forEach(el => {
+          const d = parseFloat(el.dataset.depth || 0.06);
+          const tiltX = cx * maxTilt * d * -1.1;
+          const tiltY = cy * maxTilt * d * 1.1;
+          const tz = d * maxTranslate * 1.6;
+          el.style.transform = `translateZ(${tz}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+        });
+      }
+
+      let raf = null;
+      function onMove(e){
+        const {x,y} = normCoords(e);
+        // use requestAnimationFrame for smoothness
+        if(raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(()=> applyTransform(x,y));
+      }
+
+      function reset(){
+        if(raf) cancelAnimationFrame(raf);
+        root.style.transform = '';
+        depths.forEach(el => el.style.transform = '');
+      }
+
+      // Mouse + touch
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('touchmove', onMove, {passive:true});
+      window.addEventListener('mouseleave', reset);
+      window.addEventListener('touchend', reset);
+
+      // Small subtle floating animation on blobs
+      const blobs = document.querySelectorAll('.float-blob');
+      blobs.forEach((b,i) => {
+        const dur = 7000 + i*2000;
+        b.animate([
+          { transform: 'translateZ(-100px) translateY(0px) translateX(0px) scale(1)' },
+          { transform: 'translateZ(-120px) translateY(-18px) translateX(12px) scale(1.03)' },
+          { transform: 'translateZ(-100px) translateY(0px) translateX(0px) scale(1)' }
+        ], { duration: dur, iterations: Infinity, easing: 'ease-in-out' });
+      });
+
+      // Keyboard accessibility: slightly lift focused cards
+      document.querySelectorAll('.cat').forEach(el=>{
+        el.addEventListener('keydown', (ev)=>{
+          if(ev.key === 'Enter' || ev.key === ' '){
+            ev.preventDefault();
+            // placeholder action
+            el.animate([{ transform: 'scale(1.02) translateZ(18px)' }, { transform: 'scale(1) translateZ(0)' }], { duration:220 });
+            alert('تم اختيار القسم: ' + el.textContent);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
